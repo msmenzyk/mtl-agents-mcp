@@ -39,8 +39,8 @@ args = ["-c", "cd /Users/msmenzyk/work/mtl/mtl-agents-mcp && poetry run python -
 tool_timeout_sec = 300
 ```
 
-Claude inbox hook, in `~/.claude/settings.json` under both `UserPromptSubmit` and `Stop`:
+Claude inbox hook (adds it to `UserPromptSubmit` and `Stop` in `~/.claude/settings.json`, with a backup):
 
-```json
-{"type": "command", "command": "python3 /Users/msmenzyk/work/mtl/mtl-agents-mcp/hooks/claude_inbox_hook.py"}
+```bash
+./hooks/install_claude_hook.sh
 ```

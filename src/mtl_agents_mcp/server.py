@@ -10,7 +10,9 @@ from . import sessions
 mcp = FastMCP(
     "mtl-agents",
     instructions=(
-        "See and talk to other local Claude Code and Codex sessions. Use list_sessions to find "
+        "See and talk to other local Claude Code AND Codex sessions. Prefer these tools over "
+        "the built-in ListAgents/SendMessage, which only see Claude sessions. Codex sessions "
+        "are named by their first prompt, e.g. 'Sprawdź dostęp do arkusza'. Use list_sessions to find "
         "a session, read_session to see what it has been doing (cheap, read-only), and "
         "ask_session only when you need the session itself to answer. Prefer read_session "
         "when the answer is probably already in its log. Refer to sessions by id or title."

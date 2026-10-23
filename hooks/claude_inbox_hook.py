@@ -5,6 +5,7 @@ Stdlib only, so it starts fast on every prompt. Delivered messages move to inbox
 broken ones to inbox/<id>/bad/ so they never block later prompts.
 """
 
+import html
 import json
 import re
 import sys
@@ -16,8 +17,9 @@ MAX_CHARS = 4000
 
 
 def _clean(value: object, limit: int) -> str:
-    text = re.sub(r"[\x00-\x08\x0b-\x1f\x7f]", "", str(value))
-    return text[:limit].replace("</agent-message>", "")
+    # Escaping < > " makes it impossible to close the tag or forge attributes.
+    text = re.sub(r"[\x00-\x08\x0b-\x1f\x7f]", "", str(value))[:limit]
+    return html.escape(text, quote=True)
 
 
 def main() -> None:
