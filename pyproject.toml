@@ -1,0 +1,19 @@
+[project]
+name = "mtl-agents-mcp"
+version = "0.1.0"
+description = "MCP server that lets Claude Code and Codex sessions list, read and message each other"
+authors = [
+    {name = "MusicTech Lab"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.0.0,<2",
+]
+
+[tool.poetry]
+packages = [{include = "mtl_agents_mcp", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
