@@ -12,7 +12,7 @@ mcp = FastMCP(
     instructions=(
         "See and talk to other local Claude Code AND Codex sessions. Prefer these tools over "
         "the built-in ListAgents/SendMessage, which only see Claude sessions. Codex sessions "
-        "are named by their first prompt, e.g. 'Sprawdź dostęp do arkusza'. Use list_sessions to find "
+        "are named by their first prompt, e.g. 'Review the login flow'. Use list_sessions to find "
         "a session, read_session to see what it has been doing (cheap, read-only), and "
         "ask_session only when you need the session itself to answer. Prefer read_session "
         "when the answer is probably already in its log. Refer to sessions by id or title."
@@ -64,7 +64,9 @@ def read_session(session: str, last_n: int = 10) -> str:
     except LookupError as e:
         return str(e)
     msgs = sessions.read_messages(s, last_n)
-    header = f"{s.tool} session {s.id} \"{s.title}\" ({'running' if s.running else 'closed'})"
+    header = (
+        f'{s.tool} session {s.id} "{s.title}" ({"running" if s.running else "closed"})'
+    )
     body = "\n\n".join(f"[{m.ts}] {m.role}: {m.text}" for m in msgs)
     return f"{header}\n\n{body or 'No messages.'}"
 
@@ -86,7 +88,7 @@ def ask_session(
     Args:
         session: Session id, id prefix, or part of its title.
         message: The question.
-        sender: Who is asking, e.g. "Claude in vimo". Shown to the other session.
+        sender: Who is asking, e.g. "Claude in my-project". Shown to the other session.
         wait_seconds: How long to wait for the answer.
     """
     try:
